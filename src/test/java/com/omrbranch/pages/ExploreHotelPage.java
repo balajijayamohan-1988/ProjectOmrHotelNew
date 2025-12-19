@@ -7,26 +7,18 @@ import org.openqa.selenium.support.PageFactory;
 import com.omrbranch.utility.BaseClass;
 
 public class ExploreHotelPage extends BaseClass {
-
-
-		public ExploreHotelPage() {
-			PageFactory.initElements(driver, this);
-		}
-
-		@FindBy(xpath = "//a[@data-testid='username']")
-		private WebElement loginSuccessMsg;
-
-		public WebElement getLoginSuccessMsg() {
-			return loginSuccessMsg;
-		}
-		
-		
-		public String LoginSuccess() {
-			waitForVisible(loginSuccessMsg);
-			String afterloginMsg = getElementText(loginSuccessMsg);
-			return afterloginMsg;
-		
-		
+	
+	public ExploreHotelPage() {
+		PageFactory.initElements(driver, this);
 	}
+	
+	
 
+	@FindBy(xpath = "//a[@data-testid='username']")
+	private WebElement loginMsg;
+
+	public String getSuccessfulLoginMsg() {
+		return getElementText(loginMsg);
+	}
+	
 }

@@ -1,4 +1,9 @@
+
 package com.omrbranch.pages;
+
+
+
+import java.awt.AWTException;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -7,44 +12,72 @@ import org.openqa.selenium.support.PageFactory;
 import com.omrbranch.utility.BaseClass;
 
 public class LoginPage extends BaseClass {
-
-	//constructor
-public LoginPage(){
+	
+	public LoginPage() {
 		PageFactory.initElements(driver, this);
-	}	
+	}
 	
-	//Locators
 	
-	@FindBy(id="email")
-	private  WebElement txtEmailId;	
 
-	@FindBy(id="pass")
-	private  WebElement txtPassword;
-
-	@FindBy(xpath="//button[@value='login']")
-	private WebElement BtnLogin;
-
-	public WebElement getTxtEmailId() {
-		return txtEmailId;
+	@FindBy(id = "email")
+	private WebElement txtUserName;
+	
+	@FindBy(id = "pass")
+	private WebElement txtPassord;
+	
+	@FindBy(xpath = "//button[@value='login']")
+	private WebElement btnLogin;
+	
+	@FindBy(id = "errorMessage")
+	private WebElement errLoginMessage;
+	
+	
+	public WebElement getTxtUserName() {
+		return txtUserName;
 	}
 
-	public WebElement getTxtPassword() {
-		return txtPassword;
+	public WebElement getTxtPassord() {
+		return txtPassord;
 	}
 
-	public WebElement getLstBtnLogin() {
-		return BtnLogin;
+	public WebElement getBtnLogin() {
+		return btnLogin;
 	}
 
-	//business class
-	public  void login(String userName,String passWord) {
-
-		elementSendKeys(txtEmailId, userName);
-		elementSendKeys(txtPassword, passWord);
-		elementClick(BtnLogin);
-
-
-		}
-			
+	public String getErrLoginMessage() {
+		return getElementText(errLoginMessage) ;
+	}
 	
+//	1.Login
+	public void login(String UserName, String password) {
+		elementSendKeys(txtUserName, UserName);
+		elementSendKeys(txtPassord, password);
+		elementClick(btnLogin);
+	}
+//	2.Login With Enter Key
+	public void loginWithEnterKey(String UserName,String password) throws AWTException {
+		elementSendKeys(txtUserName, UserName);
+		elementSendKeys(txtPassord, password);
+		enterKey();
+	}
+//	3.Insert invalid Credentials and Get Error Message
+	public void getErrorMessageText(String userName, String password) {
+		elementSendKeys(txtUserName,userName);
+		elementSendKeys(txtPassord, password);
+		elementClick(btnLogin);
+		
+	
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
 }
+
